@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileUploader3.BLL", "FileUp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileUploader3.Common", "FileUploader3.Common\FileUploader3.Common.csproj", "{F28EBEF6-1C07-4DFD-8230-8FDC291F0C19}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileUploader3", "FileUploader3\FileUploader3.csproj", "{325D451B-C652-4A13-BB81-92465CC47F94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileUploader3.CLI", "FileUploader3\FileUploader3.CLI.csproj", "{325D451B-C652-4A13-BB81-92465CC47F94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,9 +1,9 @@
-﻿using FileUploader3.Common.Commands;
-using FileUploader3.Common.Interfaces;
+﻿using FileUploader3.BLL.Commands;
+using FileUploader3.BLL.Interfaces;
 using System;
 using System.Text.RegularExpressions;
 
-namespace FileUploader3
+namespace FileUploader3.CLI
 {
     class Program
     {
@@ -18,6 +18,8 @@ namespace FileUploader3
                     var cmd when Regex.IsMatch(cmd, FileUploadCommand.Pattern) => new FileUploadCommand(cmd),
                     var cmd when Regex.IsMatch(cmd, FileDownloadCommand.Pattern) => new FileDownloadCommand(cmd),
                     var cmd when Regex.IsMatch(cmd, FileRemoveCommand.Pattern) => new FileRemoveCommand(cmd),
+                    var cmd when Regex.IsMatch(cmd, FileMoveCommand.Pattern) => new FileMoveCommand(cmd),
+                    var cmd when Regex.IsMatch(cmd, UserLoginCommand.Pattern) => new UserLoginCommand(cmd),
                     _ => new HelpCommand()
                 };
 

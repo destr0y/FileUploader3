@@ -1,8 +1,9 @@
-﻿using FileUploader3.Bll.Services;
-using FileUploader3.Common.Interfaces;
+﻿using FileUploader3.BLL.Services;
+using FileUploader3.BLL.Interfaces;
 using System.Text.RegularExpressions;
+using FileUploader3.DAL.Services;
 
-namespace FileUploader3.Common.Commands
+namespace FileUploader3.BLL.Commands
 {
     public class FileDownloadCommand : ICommand
     {
@@ -21,6 +22,10 @@ namespace FileUploader3.Common.Commands
 
         public string Execute()
         {
+            if (!UserService.GetInstance().User.IsAuthorized)
+            {
+                return "You must log in firstly";
+            }
             return StorageService.GetInstance().Download(sourceFile, destFile);
         }
     }

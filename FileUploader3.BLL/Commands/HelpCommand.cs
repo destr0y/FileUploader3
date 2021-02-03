@@ -1,6 +1,6 @@
-﻿using FileUploader3.Common.Interfaces;
+﻿using FileUploader3.BLL.Interfaces;
 
-namespace FileUploader3.Common.Commands
+namespace FileUploader3.BLL.Commands
 {
     public class HelpCommand : ICommand
     {

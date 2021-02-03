@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FileUploader3.DAL\FileUploader3.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

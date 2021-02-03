@@ -1,8 +1,8 @@
-﻿using FileUploader3.Bll.Services;
-using FileUploader3.Common.Interfaces;
+﻿using FileUploader3.BLL.Services;
+using FileUploader3.BLL.Interfaces;
 using System.Text.RegularExpressions;
 
-namespace FileUploader3.Common.Commands
+namespace FileUploader3.BLL.Commands
 {
     public class FileUploadCommand : ICommand
     {

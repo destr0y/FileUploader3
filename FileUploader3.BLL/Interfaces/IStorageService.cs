@@ -1,4 +1,4 @@
-﻿namespace FileUploader3.Bll.Interfaces
+﻿namespace FileUploader3.BLL.Interfaces
 {
     public interface IStorageService
     {

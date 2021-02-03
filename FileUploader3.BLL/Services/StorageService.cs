@@ -1,8 +1,8 @@
-﻿using FileUploader3.Bll.Interfaces;
+﻿using FileUploader3.BLL.Interfaces;
 using System;
 using System.IO;
 
-namespace FileUploader3.Bll.Services
+namespace FileUploader3.BLL.Services
 {
     public class StorageService : IStorageService
     {
@@ -55,7 +55,44 @@ namespace FileUploader3.Bll.Services
 
         public string Move(string sourceName, string destName)
         {
-            throw new NotImplementedException();
+            if (Path.GetDirectoryName(destName) != string.Empty)
+            {
+                return "Source name must not be a directory!";
+            }
+
+            try
+            {
+                File.Move($"Storage/{sourceName}", destName);
+                return $"The file {sourceName} has been moved to {destName}";
+            }
+            catch (FileNotFoundException)
+            {
+                return "File was not found!";
+            }
+            catch (ArgumentException)
+            {
+                return "Invalid file name!";
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return "You do not have permission to do this!";
+            }
+            catch (PathTooLongException)
+            {
+                return "Path is too long!";
+            }
+            catch (NotSupportedException)
+            {
+                return "Invalid file name!";
+            }
+            catch (IOException)
+            {
+                return $"The file {destName} already exists";
+            }
+            catch
+            {
+                return "Something went wrong";
+            }
         }
 
         public string Remove(string fileName)
