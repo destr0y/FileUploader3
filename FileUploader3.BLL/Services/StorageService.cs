@@ -1,4 +1,5 @@
 ﻿using FileUploader3.BLL.Interfaces;
+using FileUploader3.DAL.Services;
 using System;
 using System.IO;
 
@@ -15,6 +16,19 @@ namespace FileUploader3.BLL.Services
 
             return instance;
         }
+
+        private StorageService()
+        {
+            var configuration = ConfigurationService.GetInstance();
+
+            Capacity = 
+            MaxCapacity = configuration.StorageMaxCapacity;
+            MaxFileSize = configuration.StorageMaxFileSize;
+        }
+
+        private long Capacity { get; set; }
+        private long MaxCapacity { get; set; }
+        private long MaxFileSize { get; set; }
 
         public string Download(string sourceFile, string destFile)
         {
@@ -62,7 +76,9 @@ namespace FileUploader3.BLL.Services
 
             try
             {
-                File.Move($"Storage/{sourceName}", destName);
+                File.Move($"Storage/{sourceName}", $"Storage/{destName}");
+                MetaInfoService.GetInstance().Update(sourceName, destName);
+
                 return $"The file {sourceName} has been moved to {destName}";
             }
             catch (FileNotFoundException)
@@ -97,9 +113,16 @@ namespace FileUploader3.BLL.Services
 
         public string Remove(string fileName)
         {
+            if (!File.Exists($"Storage/{fileName}"))
+            {
+                return "File was not found!";
+            }
+
             try
             {
                 File.Delete($"Storage/{fileName}");
+                MetaInfoService.GetInstance().Delete(fileName);
+
                 return $"The file {fileName} has been removed";
             }
             catch (ArgumentException)
@@ -128,9 +151,12 @@ namespace FileUploader3.BLL.Services
         {
             try
             {
-                File.Copy(filePath, $"Storage/{Path.GetFileName(filePath)}");
+                var fileName = Path.GetFileName(filePath);
 
-                var file = new FileInfo($"Storage/{Path.GetFileName(filePath)}");
+                File.Copy(filePath, $"Storage/{fileName}");
+                MetaInfoService.GetInstance().Add(fileName);
+
+                var file = new FileInfo($"Storage/{fileName}");
 
                 return $"The file \"{filePath}\" has been uploaded \n" +
                        $" - File name: {file.Name} \n" +
@@ -161,7 +187,7 @@ namespace FileUploader3.BLL.Services
             {
                 return "You don't have permission to do this!";
             }
-            catch
+            catch (Exception ex)
             {
                 return "Something went wrong";
             }

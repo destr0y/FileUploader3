@@ -20,17 +20,24 @@ namespace FileUploader3.DAL.Services
             return userService;
         }
 
+        private UserService()
+        {
+            var configuration = ConfigurationService.GetInstance();
+            User = new User(configuration.UserName, configuration.UserPassword, DateTime.Now);
+        }
+
+        public bool IsAuthorized { get; private set; }
         public User User { get; private set; }
 
         public string SignIn(string name, string password)
         {
-            if (User.IsAuthorized)
+            if (IsAuthorized)
             {
                 return "You are already authorized!"; 
             }
-            if (name == "Krya" && password == "Uuu")
+            if (name == User.Name && password == User.Password)
             {
-                User.IsAuthorized = true;
+                IsAuthorized = true;
                 return "You have successfully logged in";
             }
 

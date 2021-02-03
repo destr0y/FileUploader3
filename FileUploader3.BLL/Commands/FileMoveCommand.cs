@@ -26,7 +26,7 @@ namespace FileUploader3.BLL.Commands
 
         public string Execute()
         {
-            if (!UserService.GetInstance().User.IsAuthorized)
+            if (!UserService.GetInstance().IsAuthorized)
             {
                 return "You must log in firstly!";
             }

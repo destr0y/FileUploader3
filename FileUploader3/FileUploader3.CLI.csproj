@@ -10,4 +10,10 @@
     <ProjectReference Include="..\FileUploader3.Common\FileUploader3.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

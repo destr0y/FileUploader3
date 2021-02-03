@@ -19,7 +19,9 @@ namespace FileUploader3.CLI
                     var cmd when Regex.IsMatch(cmd, FileDownloadCommand.Pattern) => new FileDownloadCommand(cmd),
                     var cmd when Regex.IsMatch(cmd, FileRemoveCommand.Pattern) => new FileRemoveCommand(cmd),
                     var cmd when Regex.IsMatch(cmd, FileMoveCommand.Pattern) => new FileMoveCommand(cmd),
+                    var cmd when Regex.IsMatch(cmd, FileInfoCommand.Pattern) => new FileInfoCommand(cmd),
                     var cmd when Regex.IsMatch(cmd, UserLoginCommand.Pattern) => new UserLoginCommand(cmd),
+                    var cmd when Regex.IsMatch(cmd, UserInfoCommand.Pattern) => new UserInfoCommand(cmd),
                     _ => new HelpCommand()
                 };
 
@@ -28,7 +30,7 @@ namespace FileUploader3.CLI
                     var result = command.Execute();
                     Console.WriteLine(result);
                 }
-                catch
+                catch (Exception ex)
                 {
                     Console.WriteLine("Something went wrong");
                 }

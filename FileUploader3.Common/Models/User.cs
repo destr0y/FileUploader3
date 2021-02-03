@@ -9,6 +9,12 @@ namespace FileUploader3.Common.Models
         public string Name { get; set; }
         public string Password { get; set; }
         public DateTime CreationDate { get; set; }
-        public bool IsAuthorized { get; set; }
+
+        public User(string name, string password, DateTime creationDate)
+        {
+            Name = name;
+            Password = password;
+            CreationDate = creationDate;
+        }
     }
 }
